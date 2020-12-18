@@ -11,20 +11,27 @@
     
     <h1 class="text-center mt-4">Text to List Generator</h1>
    
-    <div id="app" class="container" style="width: 600px;">
+   <div id="app" class="container" style="width: 600px;">
       
-      <ul class="list-group mt-4" v-if="lists.length != 0">
+      <div style="padding:0px; margin:0px;text-align:center;" >
+        <p class="badge badge-warning text-center"  >{{ errorText }}</p>
+      </div>
+      
+      <ul class="list-group mt-1" v-if="lists.length != 0">
         <li class="list-group-item" v-for="list in lists">
           {{ list }}
         </li>
       </ul>
       
       <div class="form-group mt-3">
-        <textarea rows="10" v-model="result" class="form-control" placeholder="Add your lengthy text here...">
+        <textarea rows="10" v-model="result" @keyup.enter="generateList(1)" class="form-control">
         </textarea>
       </div>
       
-      <button class="btn btn-primary" v-on:click="generateList">Generate</button>
+      <input type="submit"  class="btn btn-primary" v-on:click="generateList(2)" value="Generate">
+      
+      <input type="checkbox" class="ml-4" v-model="check"  />
+      <label>Allow enter key to submit</label>
       
     </div>
 	
@@ -48,14 +55,32 @@
     result: '',
     lists: [],
   },
-  methods: {
-    generateList: function(){
-      // this.result = "You have been clicked!"
-      const list = this.result.trim().split(".")
-      if(list[list.length-1] === '') list.pop()
-      this.lists = list
-      this.result = ""
+ methods: {
+     generateList:function(type){
+ 
+   if(type == 1){
+        if(this.check){
+          this.performGenerate()
+        }else{
+          return
+        }
+   }else{
+      this.performGenerate()
+   }
+ 
+ },
+
+performGenerate: function(){
+    if(this.result != "") {
+        const list = this.result.trim().split(".")
+          if(list[list.length - 1] === '')list.pop()
+          this.lists = list
+          this.result = ""
+    }else{
+    		this.errorText = "We need those lengthy words you know!"
+      setTimeout(()=> this.errorText = "", 1000)
     }
+}
   }
 })
 	  
