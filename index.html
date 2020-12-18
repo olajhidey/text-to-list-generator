@@ -1,0 +1,45 @@
+<!Doctype html>
+<html>
+  <head>
+    <title>Text to List Generator</title>
+    <!-- Latest compiled and minified CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet"      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+  <body>
+    
+    <h1 class="text-center mt-4">Text to List Generator</h1>
+   
+    <div id="app" class="container" style="width: 600px;">
+      
+      <ul class="list-group mt-4" v-if="lists.length != 0">
+        <li class="list-group-item" v-for="list in lists">
+          {{ list }}
+        </li>
+      </ul>
+      
+      <div class="form-group mt-3">
+        <textarea rows="10" v-model="result" class="form-control">
+        </textarea>
+      </div>
+      
+      <button class="btn btn-primary" v-on:click="generateList">Generate</button>
+      
+    </div>
+	
+     <script src="app.js" ></script>    
+
+       <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    
+    <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
