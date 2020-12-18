@@ -7,7 +7,10 @@ var app = new Vue({
   methods: {
     generateList: function(){
       // this.result = "You have been clicked!"
-      this.lists = this.result.split(".")
+      
+      const list = this.result.split(".")
+      if(list[list.length -1] == '') list.pop()
+      this.lists = list   
       this.result = ""
     }
   }
