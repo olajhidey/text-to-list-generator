@@ -30,10 +30,10 @@
         </textarea>
       </div>
       
-      <input type="submit"  class="btn btn-primary" v-on:click="generateList(2)" value="Generate">
+      <input type="submit"  v-if="!check" class="btn btn-primary" v-on:click="generateList(2)" value="Generate">
       
       <input type="checkbox" class="ml-4" v-model="check"  />
-      <label>Allow enter key to submit</label>
+      <label>Use enter key to submit</label>
       
     </div>
 	
@@ -56,15 +56,17 @@
   data: {
     result: '',
     lists: [],
-    check: '',
+    check: true,
     errorText: '',
   },
+  
  methods: {
      generateList:function(type){
  
    if(type == 1){
         if(this.check){
           this.performGenerate()
+	
         }else{
           return
         }
