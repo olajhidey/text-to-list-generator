@@ -20,7 +20,7 @@
       </div>
       
       <ul class="list-group mt-1" v-if="lists.length != 0">
-        <li class="list-group-item" v-bind:id="textId"  @click="copyText(event)" v-for="list in lists">
+        <li class="list-group-item" @click="copyText(event)" v-for="list in lists">
           {{ list }}
 	 
         </li>
@@ -31,9 +31,9 @@
         </textarea>
       </div>
       
-      <input type="submit"  v-if="!check" class="btn btn-primary" v-on:click="generateList(2)" value="Generate">
+      <input type="submit"  v-if="check" class="btn btn-primary" v-on:click="generateList(2)" value="Generate">
       
-      <input type="checkbox" class="ml-4" v-model="check"  />
+      <input type="checkbox" class="ml-4" v-model="check" @change="toggleCheck($event)"  />
       <label>Use enter key to submit</label>
       
     </div>
@@ -63,7 +63,7 @@
   },
   
  methods: {
-     generateList:function(type){
+generateList:function(type){
  
    if(type == 1){
         if(this.check){
@@ -115,6 +115,9 @@ performGenerate: function(){
     		this.errorText = "We need those lengthy words you know!"
       setTimeout(()=> this.errorText = "", 1000)
     }
+},
+toggleCheck: function($event){
+     console.log($event)
 }
   }
 })
